@@ -7,9 +7,22 @@
 	</head>
 	<body>
 		<div class="chart-container">
-			<canvas id="line-chartcanvas"></canvas>
+			<canvas id="weather-chartcanvas"></canvas>
+			<canvas id="ph-chartcanvas"></canvas>
+			<canvas id="ecc-chartcanvas"></canvas>
+			<canvas id="lumen-chartcanvas"></canvas>
+			<canvas id="pump-chartcanvas"></canvas>
+
 		</div>
 	</body>
+<style type="text/css">
+	.chart-container {
+		padding: 50px 5px;
+	}
+	canvas {
+		padding: 50px 5px;
+	}
+</style>
 	<footer>
 		<!-- javascript -->
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

@@ -22,7 +22,7 @@ class DB_CONNECT {
 
         require_once($filepath.'/dbconfig.php');
         
-		// Connecting to mysql database
+		// Connecting to mysql (phpmyadmin) database
         $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_connect_error());
  
         // Selecing database

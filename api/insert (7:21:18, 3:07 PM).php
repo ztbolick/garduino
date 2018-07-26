@@ -5,23 +5,28 @@ header("Content-Type: application/json; charset=UTF-8");
 
 //Creating Array for JSON response
 $response = array();
+
+
+// $queryString = "INSERT INTO weather(temp,hum) VALUES('$temp','$hum')";
  
 // Check if we got the field from the user
 if (isset($_GET['temp']) && isset($_GET['hum'])) {
  
     $temp = $_GET['temp'];
     $hum = $_GET['hum'];
- 
+
     // Include data base connect class
     $filepath = realpath (dirname(__FILE__));
-	require_once($filepath."/db_connect.php");
+    require_once($filepath."/db_connect.php");
+    require_once($filepath.'/query.php');
 
- 
-    // Connecting to database 
+    // Creating DB connect object 
     $db = new DB_CONNECT();
- 
+    // Creating SQLStringify object
+    $query = new SQLStringify();
+
     // Fire SQL query to insert data in weather
-    $result = mysqli_query($db->connect(), "INSERT INTO weather(temp,hum) VALUES('$temp','$hum')");
+    $result = mysqli_query($db->connect(), $query->__call('query', 'temp', 'hum', $temp, $hum));
  
     // Check for succesfull execution of query
     if ($result) {
