@@ -18,7 +18,7 @@ if (isset($_GET["id"])) {
     $id = $_GET['id'];
  
      // Fire SQL query to get weather data by id
-    $result = mysqli_query($db->connect(), "SELECT *FROM weather WHERE id = '$id'");
+    $result = mysqli_query($db->connect(), "SELECT * FROM weather WHERE id = '$id'");
 	
 	//If returned result is not empty
     if (!empty($result)) {
