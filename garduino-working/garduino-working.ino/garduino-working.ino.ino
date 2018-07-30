@@ -1,8 +1,8 @@
 
 // ESP2066
 #include <SoftwareSerial.h>
-#define ESP8266_rxPin 2
-#define ESP8266_txPin 3
+#define ESP8266_rxPin 3
+#define ESP8266_txPin 2
 
 int delayTime = 5000;
 
@@ -31,19 +31,22 @@ void setup ()
 {
   pinMode(ESP8266_rxPin, INPUT);
   pinMode(ESP8266_txPin, OUTPUT);
-  
+
   ESP8266.begin(9600);
   ESP8266.listen();
   Serial.begin(9600);
+  ESP8266.print("AT+RST\r\n");
+  delay(10000);
+  ESP8266.print("AT+CIPMUX=1\r\n");
 }
 
 void loop ()
 {
-  Serial.print("Temp: ");
-  Serial.println(getTempurature());
-  Serial.print("Light: ");
-  Serial.println(getLight());
-  ESP8266.print("AT\r\n");
+//  Serial.print("Temp: ");
+//  Serial.println(getTempurature());
+//  Serial.print("Light: ");
+//  Serial.println(getLight());
+  getHttp();
   readESP(3000);
   delay(delayTime);
 }
@@ -73,15 +76,33 @@ int getLight() {
 void readESP(const int timeout) {
   String reponse = "";
   long int time = millis();
-  while( (time+timeout) > millis())
+  while ( (time + timeout) > millis())
   {
-    while(ESP8266.available())
+    while (ESP8266.available())
     {
       char c = ESP8266.read();
-      reponse+=c;
+      reponse += c;
     }
   }
-  Serial.println(reponse); 
+  Serial.println(reponse);
+}
+
+void getHttp() {
+  ESP8266.print("AT+CIPSTART=1,\"TCP\",\"zacattack.000webhostapp.com\",80\r\n");
+  delay(100);
+  String getString = "GET /garduino/api/insert.php?temp=80&hum=30 HTTP/1.1\r\n";
+  int getLength = getString.length();
+
+  ESP8266.print("AT+CIPSEND=1,107\r\n");
+  delay(100);
+  ESP8266.print(getString);
+  delay(100);
+  ESP8266.print("Host: 145.14.145.55\r\n");
+  delay(100);
+  ESP8266.print("Connection: keep-alive\r\n");
+  delay(100);
+  ESP8266.print("\r\n");
+
 }
 
 
