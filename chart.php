@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
+<?php include $_SERVER['DOCUMENT_ROOT'].'/garduino/sections/header.php'?>
+</head>
+<body>
+
+	<div class="chart-container">
+	<div class="current">
+		<h3>Current:
+		<span id="currentReading"></span>
+		</h3>
+	</div>
+		<canvas id="weatherChartCanvas"></canvas>
+		<canvas id="phChartCanvas" style="display: none;"></canvas>
+		<canvas id="eccChartCanvas" style="display: none;"></canvas>
+		<canvas id="lumenChartCanvas" style="display: none;"></canvas>
+		<canvas id="pumpChartCanvas" style="display: none;"></canvas>
+	</div>
+	
+</body>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/garduino/sections/footer.php'?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/garduino/sections/scripts.php'?>
+=======
 	<meta charset="UTF-8">
 	<title>Garduino Line Graph</title>
 	<link href="css/default.css" rel="stylesheet">
@@ -67,4 +89,5 @@ background-color: #4CAF50;
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 	<script src="js/line-db.js"></script>
 </footer>
+>>>>>>> ae5458457f4c510cd391299ca91813f7afa6fae0
 </html>

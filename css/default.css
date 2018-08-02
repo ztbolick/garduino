@@ -1,11 +1,39 @@
-.chart-container {
-	width:  80%;
-	height: 480px;
-	margin: 0 auto;
+body {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	background-color: #eaeaea;
+	letter-spacing: 0.15em;
 }
-
-.pie-chart-container {
-	width : 360px;
-	height : 360px;
-	float : left;
+.chart-container {
+	margin: 3% 5% 17% 5%;
+}
+canvas {
+	padding: 50px 5px;
+}
+ul {
+list-style-type: none;
+margin: 0;
+padding: 0;
+overflow: hidden;
+background-color: #292C2F;
+position: -webkit-sticky; /* Safari */
+position: sticky;
+top: 0;
+}
+li {
+float: left;
+}
+li a {
+display: block;
+color: white;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+}
+li a:hover {
+background-color: #111;
+}
+li .active {
+background-color: #4CAF50;
 }
