@@ -1,5 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: GET");
 header("Content-Type: application/json; charset=UTF-8");
 //Creating Array for JSON response
 $response = array();
@@ -9,15 +10,11 @@ $filepath = realpath (dirname(__FILE__));
 require_once($filepath."/db_connect.php");
 
 $tableName = $_GET['table'];
-<<<<<<< HEAD
 $userToken = $_GET['appid'];
-=======
->>>>>>> ae5458457f4c510cd391299ca91813f7afa6fae0
 
  // Connecting to database 
 $db = new DB_CONNECT();
  
-<<<<<<< HEAD
 $tokenResult = mysqli_query($db->connect(), "SELECT 1 FROM tokens WHERE appid = '$userToken'") or die(mysqli_error());
 $tokenResult = $tokenResult->fetch_assoc();
 
@@ -29,13 +26,6 @@ if ($tokenResult[1] == 1) {
 } else {
 	echo 'Invalid Application Token! Please check your token and try again.';
 }
-=======
- // Fire SQL query to get all data from weather
-$result = mysqli_query($db->connect(), "SELECT * FROM $tableName") or die(mysqli_error());
-
-
-findTable($result, $tableName);
->>>>>>> ae5458457f4c510cd391299ca91813f7afa6fae0
 
 function findTable($result, $tableName) {
 	if ($tableName == 'weather') {

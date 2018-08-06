@@ -1,27 +1,13 @@
 <?php
-$filepath = realpath (dirname(__FILE__));
-require_once($filepath."/api/db_connect.php");
-$db = new DB_CONNECT();
-
-echo var_dump($db);
-
 $uname = $_POST['username'];
 $pword = $_POST['password'];
+$error = '<div class="alert-danger" role="alert">Invalid Login! Please check your Username and Password and try again!</div>';
+ob_start();
 
-	function tryLogin() {
-	$unameResult = mysqli_query($db->connect(), "SELECT 1 FROM streetCred WHERE nobres = '$uname'") or die(mysqli_error());
-	$unameResult = $unameResult->fetch_assoc();
-	$pwordResult = mysqli_query($db->connect(), "SELECT 1 FROM streetCred WHERE contrasena = '$pword'") or die(mysqli_error());
-	$pwordResult = $pwordResult->fetch_assoc();
-
-	if ($unameResult[1] == 1 && $pwordResult[1] == 1 ) {
-		return 1;
-	} else {
-		return 0;
-	}
-}
+include_once $_SERVER['DOCUMENT_ROOT'].'/garduino/api/db_connect.php';
+$db = new DB_CONNECT();
 ?>
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -47,15 +33,22 @@ $pword = $_POST['password'];
 			<h3 class="text-center">Login</h3>
 			<?php
 				if(isset($_POST['submit'])){
-					if (tryLogin()) {
-						echo "<div class='alert alert-danger'>Logged In</div>";
+					$unameResult = mysqli_query($db->connect(), "SELECT 1 FROM streetCred WHERE email = '$uname'") or die(mysqli_error());
+					$unameResult = $unameResult->fetch_assoc();
+					$pwordResult = mysqli_query($db->connect(), "SELECT 1 FROM tokens WHERE contrasena = '$pword'") or die(mysqli_error());
+					$pwordResult = $pwordResult->fetch_assoc();
+
+					if ($unameResult[1] == 1 && $pwordResult[1] == 1 ) {
+						header("Location: http://zacattack.000webhostapp.com/garduino/chart.php");
+						die();
 					} else {
-						echo "<div class='alert alert-danger'>Username and Password do not match.</div>";
+						echo $error;
 					}
 				}
 			?>
 			<form action="" method="post">
 				<div class="form-group">
+					<span id="error"></span>
 					<label for="username">Username:</label>
 					<input type="text" class="form-control" id="username" name="username" required>
 				</div>
@@ -68,4 +61,9 @@ $pword = $_POST['password'];
 		</div>
 	</body>
 	<?php include $_SERVER['DOCUMENT_ROOT'].'/garduino/sections/footer.php'?>
-</html> -->
+	<style>
+		footer {
+			bottom: 0;
+		}
+	</style>
+</html>

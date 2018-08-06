@@ -12,7 +12,7 @@ echo '<meta charset="UTF-8">
 			<li><a id="ecc">ECC</a></li>
 			<li><a id="ph">PH</a></li>
 			<li><a id="lumen">Lumens</a></li>
-			<li><a id="logout">Log Out</a></li>
+			<li class="logInOut"><a href="logout.php">Log Out</a></li>
 		</ul>
 	</nav>
 	';

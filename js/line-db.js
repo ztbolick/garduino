@@ -1,3 +1,20 @@
+/*
+ * Garduino an integrated dashboard for arduino gardens
+ * Copyright (C) 2018 Zac Bolick
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 var colorSet = {
 	mainA : '#05668D',
@@ -15,79 +32,105 @@ var colorSet = {
 	accent : '#F75C03', 
 	accentLight : '#FCC3A3', 
 	accentDark : '#B44303',
-}
-Array.prototype.last = function() {return this[this.length-1];}
+};
+
+var currentReadings = [];
+
+Array.prototype.last = function() {
+	return this[this.length-1];
+};
+
+Array.prototype.insert = function ( index, item ) {
+    this.splice( index, 0, item );
+};
 
 $(document).ready(function() {
 	"use strict";
-<<<<<<< HEAD
 
+	// Preforms AJAX call for each of the charts
+	chartInit();	
+
+	// Assigns a click event listener to each nav element
+	$('nav ul li a').on('click', function() {
+		$('nav ul li a').removeClass('active');
+		$(this).addClass('active');
+		
+		// Use the id of the element that was clicked to make a string
+		// containing the graph canvas to be targeted
+		var chartName = $(this).prop('id');
+		chartName+= 'ChartCanvas';
+
+		// loop through all chart elements looking for the id
+		$.each($('canvas'), function(i, item) {
+			// if we find the chart show it
+			if ($(this).prop('id') == chartName) {
+				$(this).slideDown('1000');
+			} // if we it's not the one we want hide it
+			else {
+				$(this).slideUp('1000');
+			}
+		});
+
+		// set the current reading for whatever chart we're on
+		if (chartName == 'weatherChartCanvas') {
+			setCurrentReading(' Temp: ' + currentReadings[0]);
+		} else if (chartName == 'eccChartCanvas') {
+			setCurrentReading(' ECC: ' + currentReadings[1]);
+		} else if (chartName == 'phChartCanvas') {
+			setCurrentReading(' pH: ' + currentReadings[2]);
+		} else if (chartName == 'lumenChartCanvas') {
+			setCurrentReading(' Lumens: ' + currentReadings[3]);
+		}
+	});
+});
+
+
+
+
+
+
+
+
+
+
+/*
+ * Ajax Chart Fuctions
+ *
+ * Each of these fucntions fires an ajax call to the read API
+ * and returns the JSON data it does not take an arguments
+ */
+
+function chartInit() {
+	weatherSelected();
+	eccSelected();
+	phSelected();
+	lumenSelected();
+}
+
+
+function weatherSelected() {
 	$.ajax({
 		url : "http://zacattack.000webhostapp.com/garduino/api/read.php?table=weather&appid=test",
 		type : "GET",
 		success : function(data){
 			Chart.defaults.global.hover.mode = 'nearest';
-=======
-	$.ajax({
-		url : "http://zacattack.000webhostapp.com/garduino/api/read.php?table=weather",
-		type : "GET",
-		success : function(data){
-
-			// console.log(data);
->>>>>>> ae5458457f4c510cd391299ca91813f7afa6fae0
 
 			let weatherData = {
 			ID : [],
 			temp : [],
 			hum : []
 			};
-<<<<<<< HEAD
-=======
-			let parsedData = [];
-
-			for (let things in data) {
-				for (let theArrays in data[things]) {
-					for (let vals in data[things][theArrays]) {
-						// console.log(vals + ' is ' + data[things][theArrays][vals]);
-						if (parsedData.length == 0) {
-							// push catagory name if none exist in parsed data yet
-							parsedData.push(vals);
-						} else {
-							// loop through parsed data to see if a catagory has been added
-							for (var i = 0; i < parsedData.length; i++) {
-								let j = 0;
-								console.log('vals: ' + vals);
-								console.log('parsedData: ' + parsedData[i]);
-								console.log(parsedData.length);
-								if (vals == parsedData[i]) {
-									j++;
-								}
-								console.log(j);
-							}
-						}
-						// parsedData.vals.push(data[things][theArrays][vals]);
-					}
-				}
-			}
-			console.log(parsedData);
->>>>>>> ae5458457f4c510cd391299ca91813f7afa6fae0
 
 			$.each(data[Object.keys(data)[0]], function(i, item) {
 				weatherData.ID.push(item.id);
 				weatherData.temp.push(item.temp);
 				weatherData.hum.push(item.hum);
 			});
-<<<<<<< HEAD
 
-			setCurrentReading(weatherData.temp.last());
+			currentReadings.insert(0, weatherData.temp.last());
 
 			//get canvas
 			let weatherCtx = $("#weatherChartCanvas");
-=======
-
-			//get canvas
-			let weatherCtx = $("#weather-chartcanvas");
->>>>>>> ae5458457f4c510cd391299ca91813f7afa6fae0
 			// graph elements
 			weatherData = {
 				labels : weatherData.ID,
@@ -146,86 +189,13 @@ $(document).ready(function() {
 				type : "line",
 				data : weatherData,
 				options : weatherOptions
-<<<<<<< HEAD
 			});
-=======
-			} );
->>>>>>> ae5458457f4c510cd391299ca91813f7afa6fae0
 		},
 		error : function(data) {
 			console.log(data);
 		}
-	});
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	$('nav ul li a').on('click', function() {
-		$('nav ul li a').removeClass('active');
-		$(this).addClass('active');
-		
-
-		var chartName = $(this).prop('id');
-		chartName+= 'ChartCanvas';
-
-		$.each($('canvas'), function(i, item) {
-			
-
-			if ($(this).prop('id') == chartName) {
-				$(this).slideDown();
-			} else {
-				$(this).slideUp();
-			}
-		});
-
-		if (chartName == 'eccChartCanvas') {
-			eccSelected();
-		} else if (chartName == 'phChartCanvas') {
-			phSelected();
-		} else if (chartName == 'lumenChartCanvas') {
-			lumenSelected();
-		}
-	});
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	});	
+}
 
 function eccSelected() {
 	$.ajax({
@@ -246,7 +216,7 @@ function eccSelected() {
 				eccData.eccDifference.push(item.eccCurrent-item.eccTarget);
 			});
 
-			setCurrentReading(eccData.eccCurrent.last());
+			currentReadings.insert(1, eccData.eccCurrent.last());
 
 			//get canvas
 			let eccCtx = $("#eccChartCanvas");
@@ -332,7 +302,7 @@ function phSelected() {
 				phData.phDifference.push(item.phCurrent-item.phTarget);
 
 			});
-			setCurrentReading(phData.phCurrent.last());
+			currentReadings.insert(2, phData.phCurrent.last());
 
 			//get canvas
 			let phCtx = $("#phChartCanvas");
@@ -418,7 +388,7 @@ function lumenSelected() {
 				lumenData.lumenTarget.push(item.lumenTarget);
 				lumenData.lumenDifference.push(item.lumenTarget- item.lumenCurrent);
 			});
-			setCurrentReading(lumenData.lumenCurrent.last());
+			currentReadings.insert(3, lumenData.lumenCurrent.last());
 
 
 			//get canvas
@@ -508,101 +478,6 @@ function setCurrentReading(value) {
 
 
 
-=======
-	$('ul li a').on('click', function() {
-		$('ul li a').removeClass('active');
-		let element = $(this);
-		element.addClass('active');
-		let chartName = element.text().toLowerCase();
-		$.ajax({
-			url : "http://zacattack.000webhostapp.com/garduino/api/read.php?table=" + chartName,
-			type : "GET",
-			success : function(data){
-				let weatherData = {
-				ID : [],
-				temp : [],
-				hum : []
-				};
-
-				$.each(data.weather, function(i, item) {
-					weatherData.ID.push(item.id);
-					weatherData.temp.push(item.temp);
-					weatherData.hum.push(item.hum);
-				});
-
-				//get canvas
-				let weatherCtx = $("#weather-chartcanvas");
-				// graph elements
-				weatherData = {
-					labels : weatherData.ID,
-					datasets : [
-						{
-							label : "Tempurature",
-							data : weatherData.temp,
-							backgroundColor : "red",
-							borderColor : "lightred",
-							fill : false,
-							lineTension : 0,
-							pointRadius : 5
-						},
-						{
-							label : "Humidity",
-							data : weatherData.hum,
-							backgroundColor : "blue",
-							borderColor : "lightblue",
-							fill : false,
-							lineTension : 0,
-							pointRadius : 5
-						}
-					]
-				};
-				// set options for graph table
-				let weatherOptions = {
-					title : {
-						display : true,
-						position : "top",
-						text : "Weather Information",
-						fontSize : 18,
-						fontColor : "#111"
-					},
-					legend : {
-						display : true,
-						position : "bottom"
-					}
-				};
-				// create chart
-				let weatherChart = new Chart( weatherCtx, {
-					type : "line",
-					data : weatherData,
-					options : weatherOptions
-				} );
-			},
-			error : function(data) {
-				console.log(data);
-			}
-		});
-	});
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> ae5458457f4c510cd391299ca91813f7afa6fae0
 
 
 

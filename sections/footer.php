@@ -1,7 +1,5 @@
 <?php
 echo '<footer class="footer-distributed">
-		<link rel="stylesheet" href="css/footer-distributed-with-contact-form.css">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 			<div class="footer-left">
 				<h3>Garduino</h3>
 				<p class="footer-links">

@@ -26,14 +26,27 @@ float: left;
 }
 li a {
 display: block;
-color: white;
+color: white !important;
 text-align: center;
-padding: 14px 16px;
-text-decoration: none;
+padding: 14px 16px; 
+text-decoration: none !important; 
 }
 li a:hover {
 background-color: #111;
 }
 li .active {
 background-color: #4CAF50;
+}
+.alert-danger {
+    background-color: #e01e1a !important;
+    border-color: #e01e1a !important;
+    color: #ffffff !important;
+    padding: 15px;
+    margin-bottom: 21px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.logInOut{
+	background-color: #F75C03;
+	float: right;
 }
