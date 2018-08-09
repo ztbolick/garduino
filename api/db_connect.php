@@ -4,20 +4,20 @@ class DB_CONNECT {
  
     // Constructor
     function __construct() {
-        // Trying to connect to the database
+        // Method to connect to the database after the object is instantiated
         $this->connect();
     }
  
     // Destructor
     function __destruct() {
-        // Closing the connection to database
+        // Method call to close the connection to the database
         $this->close();
     }
  
    // Function to connect to the database
     function connect() {
 
-        //importing dbconfig.php file which contains database credentials 
+        // importing dbconfig.php file which contains database credentials 
         $filepath = realpath (dirname(__FILE__));
 
         require_once($filepath.'/dbconfig.php');

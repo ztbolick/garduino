@@ -1,52 +1,173 @@
+/*RESET*/
+/*html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent;} body {line-height: 1;}ol, ul{list-style:none;} blockquote, q{quotes:none;} blockquote:before, blockquote:after, q:before, q:after{content:'';content:none;} :focus{outline:0;} ins{text-decoration:none;} del{text-decoration:line-through;} table{border-collapse:collapse; border-spacing:0;}*/
+
+:root {
+	--mainA : #05668D;
+	--mainAlight : #76ABC0;
+	--mainAdark : #03384D;
+	--mainB : #028090;
+	--mainBlight : #A3D0D6;
+	--mainBdark : #025E69;
+	--secondA : #00A896;
+	--secondAlight : #A2DFD8; 
+	--secondAdark : #007B6E; 
+	--secondB : #02C39A; 
+	--secondBlight : #A3E9DA; 
+	--secondBdark : #028E71; 
+	--accent : #F75C03; 
+	--accentLight : #FCC3A3; 
+	--accentDark : #B44303;
+}
+
 body {
 	margin: 0px;
 	padding: 0px;
 	border: 0px;
 	background-color: #eaeaea;
 	letter-spacing: 0.15em;
+	text-align: center;
 }
+/* makes the chart not work :/
+div {
+	display: inline-block;
+}*/
 .chart-container {
 	margin: 3% 5% 17% 5%;
 }
-canvas {
-	padding: 50px 5px;
+label {
+    margin: 10px;
+}
+button {
+	margin: 10px;
 }
 ul {
-list-style-type: none;
-margin: 0;
-padding: 0;
-overflow: hidden;
-background-color: #292C2F;
-position: -webkit-sticky; /* Safari */
-position: sticky;
-top: 0;
+	background: #25272A;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
+	top: 0;
 }
 li {
-float: left;
+	float: left;
 }
 li a {
-display: block;
-color: white !important;
-text-align: center;
-padding: 14px 16px; 
-text-decoration: none !important; 
+	display: block;
+	color: white !important;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none !important;
 }
 li a:hover {
-background-color: #111;
+	background-color: #111;
 }
 li .active {
-background-color: #4CAF50;
+	background-color: var(--secondB);
 }
 .alert-danger {
-    background-color: #e01e1a !important;
-    border-color: #e01e1a !important;
-    color: #ffffff !important;
-    padding: 15px;
-    margin-bottom: 21px;
-    border: 1px solid transparent;
-    border-radius: 4px;
+    width: 280px;
+	background-color: #e01e1a !important;
+	border-color: #e01e1a !important;
+	color: #ffffff !important;
+	padding: 15px;
+	margin-bottom: 21px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+.alert-success {
+    margin: auto;
+    color: white;
+    background-color: var(--secondB) !important;
+    width: 280px;
+	padding: 15px;
+	margin-bottom: 21px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+.alert-warning {
+    margin: auto;
+    width: 280px;
+	padding: 15px;
+	margin-bottom: 21px;
+	border: 1px solid transparent;
+	border-radius: 4px;
 }
 .logInOut{
 	background-color: #F75C03;
 	float: right;
 }
+.form-control {
+	width: 20em;
+}
+.side-img {
+    width: auto;
+    height: 400px;
+    float: right;
+}
+.form-group {
+	display: inline-block;
+	margin-top: 50px;
+}
+
+
+
+
+.login{
+	background-color: #F75C03;
+	float: right;
+}
+.signup {
+	float: right;
+}
+#signup {
+	color: #F75C03 !important;
+}
+.wrapper {
+	padding: 1.5vw;
+}
+
+/*http://blog.teamtreehouse.com/create-an-absolute-basic-mobile-css-responsive-navigation-menu*/
+@media only screen and (max-width : 786px) {
+
+	header {
+
+		position: absolute;
+
+	}
+
+	#menu-icon {
+
+		display:inline-block;
+
+	}
+
+	nav ul, nav:active ul { 
+
+		display: none;
+		position: absolute;
+		padding: 10px;
+		border: 2.5px solid var(--secondB);
+		right: 10px;
+		top: 50px;
+		width: 25%;
+		border-radius: 10px;
+
+	}
+
+	nav li {
+
+		text-align: center;
+		width: 100%;
+		padding: 10px 0;
+		margin: 0;
+
+	}
+
+	nav:hover ul {
+
+		display: block;
+
+	}
+

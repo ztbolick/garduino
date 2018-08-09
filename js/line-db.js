@@ -186,7 +186,7 @@ function weatherSelected() {
 			};
 			// create chart
 			let weatherChart = new Chart( weatherCtx, {
-				type : "line",
+				type : "bar",
 				data : weatherData,
 				options : weatherOptions
 			});
@@ -442,16 +442,7 @@ function lumenSelected() {
 						fontSize : 15,
 						padding : 20,
 					}
-				},
-				scales : {
-			        yAxes: [{
-			            display: true,
-			            ticks: {
-			                suggestedMax: 800, 
-			                suggestedMin: 200, 
-			            }
-			        }]
-			    }
+				}
 			};
 			// create chart
 			let lumenChart = new Chart( lumenCtx, {
@@ -469,22 +460,3 @@ function lumenSelected() {
 function setCurrentReading(value) {
 	$('#currentReading').html(value)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
