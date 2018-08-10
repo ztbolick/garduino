@@ -16,12 +16,16 @@ $db = new DB_CONNECT();
 			echo $uname . '<br>';
 			echo $pword . '<br>';
 			$query = "SELECT * FROM `streetCred` WHERE `nobres` = '$uname' AND `contrasena` = '$pword'";
-			// Fire sql query and store it in the results
+			// Fire sql query and store it in the ingres_result_seek(result, position)
 			$result = mysqli_query($db->connect(), $query);
 			if (mysqli_num_rows($result) > 0) {
 				session_start();
 				$_SESSION['username'] = $uname;
 				$_SESSION['appid'] = sha1($salt.$uname);
+
+				$query = "UPDATE `streetCred` SET `active` = 'yes' WHERE `nobres` = '$uname'";
+				mysqli_query($db->connect(), $query);
+
 				header("Location: http://zacattack.000webhostapp.com/garduino/chart.php");
 				die();
 			} else {

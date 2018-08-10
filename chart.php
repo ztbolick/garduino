@@ -22,5 +22,5 @@
 		</div>
 	</body>
 	<?php include $_SERVER['DOCUMENT_ROOT'].'/garduino/sections/footer.php'?>
-	<script src="js/line-db.js"></script>
+	<script src="js/jsjqfinal.js"></script>
 </html>>
