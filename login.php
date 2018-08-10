@@ -1,7 +1,13 @@
 <?php
 error_reporting(0);
+ob_start();
 
 $error = '<div class="alert-danger" role="alert">Invalid Login! Please check your Username and Password and try again!</div>';
+
+if (isset($_SESSION['username'])) {
+	header("Location: http://zacattack.000webhostapp.com/garduino/chart.php");
+	die();
+}
 ?>
 <!DOCTYPE html>
 <html>

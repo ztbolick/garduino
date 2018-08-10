@@ -11,6 +11,9 @@
 				<span id="currentReading"></span>
 				</h3>
 			</div>
+<!-- 			<span>
+		<?php if (isset($_SESSION['username'])) { echo var_dump($_SESSION);}?>
+			</span> -->
 			<canvas id="weatherChartCanvas"></canvas>
 			<canvas id="eccChartCanvas" style="display: none;"></canvas>
 			<canvas id="phChartCanvas" style="display: none;"></canvas>

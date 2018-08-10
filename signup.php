@@ -112,10 +112,6 @@
 			</div>
 		</footer>
 <style>
-.footer-distributed{
-	position: absolute;
-	bottom: 0px;
-}
 @media (max-width: 967px) {
 		.footer-distributed{
 		bottom: auto;

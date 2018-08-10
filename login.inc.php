@@ -1,7 +1,10 @@
 <?php
 ob_start();
 $uname = $_POST['username_current'];
+$salt = 'iAmTooSaltyForMySalt';
 $pword = $_POST['password_current'];
+$pword = sha1($salt.$pword);
+
 include_once $_SERVER['DOCUMENT_ROOT'].'/garduino/api/db_connect.php';
 
 $db = new DB_CONNECT();
@@ -10,15 +13,15 @@ $db = new DB_CONNECT();
 		if (empty($uname || empty($pword))) {
 			exit(header("Location: login.php?login=error"));
 		} else {
+			echo $uname . '<br>';
+			echo $pword . '<br>';
+			$query = "SELECT * FROM `streetCred` WHERE `nobres` = '$uname' AND `contrasena` = '$pword'";
 			// Fire sql query and store it in the results
-			$unameResult = mysqli_query($db->connect(), "SELECT 1 FROM streetCred WHERE email = '$uname'") or die(mysqli_error());
-			$unameResult = $unameResult->fetch_assoc();
-
-			$pwordResult = mysqli_query($db->connect(), "SELECT 1 FROM tokens WHERE contrasena = '$pword'") or die(mysqli_error());
-			$pwordResult = $pwordResult->fetch_assoc();
-			// if the sql query shows email and password let them in
-			// this might not check if its the password for the specific username
-			if ($unameResult[1] == 1 && $pwordResult[1] == 1 ) {
+			$result = mysqli_query($db->connect(), $query);
+			if (mysqli_num_rows($result) > 0) {
+				session_start();
+				$_SESSION['username'] = $uname;
+				$_SESSION['appid'] = sha1($salt.$uname);
 				header("Location: http://zacattack.000webhostapp.com/garduino/chart.php");
 				die();
 			} else {

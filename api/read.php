@@ -19,14 +19,14 @@ $userToken = $_GET['appid'];
 $db = new DB_CONNECT();
  
 // Submit a query to the database
-$tokenResult = mysqli_query($db->connect(), "SELECT 1 FROM tokens WHERE appid = '$userToken'") or die(mysqli_error());
+$tokenResult = mysqli_query($db->connect(), "SELECT 1 FROM streetCred WHERE appid = '$userToken'") or die(mysqli_error($db));
 // Convert the response into an assosiative array
 $tokenResult = $tokenResult->fetch_assoc();
 
 // If the token is in the database execute their query
 if ($tokenResult[1] == 1) {
 	// Fire SQL query to get all data from the table they've selected
-	$result = mysqli_query($db->connect(), "SELECT * FROM $tableName") or die(mysqli_error());
+	$result = mysqli_query($db->connect(), "SELECT * FROM $tableName") or die(mysqli_error($db));
 
 	// Calls function to find out what table they want
 	findTable($result, $tableName);

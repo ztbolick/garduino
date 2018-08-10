@@ -186,7 +186,7 @@ function weatherSelected() {
 			};
 			// create chart
 			let weatherChart = new Chart( weatherCtx, {
-				type : "bar",
+				type : "line",
 				data : weatherData,
 				options : weatherOptions
 			});
